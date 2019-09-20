@@ -1,3 +1,5 @@
+# Transposition Cipher test
+# Adapted from https://www.nostarch.com/crackingcodes (BSD Licensed)
 import sys
 import random
 import a1p1
