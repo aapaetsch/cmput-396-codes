@@ -7,15 +7,18 @@ def main():
 
     message = "XOV EK HLYR NUCO HEEEWADCRETL CEEOACT KD"
     key = [2,4,6,8,10,1,3,5,7,9]
-    decryptedText = transpositionDecrypt(key, message)
+    decryptedText = messageDecrypting(key, message)
     print(decryptedText + "|\n")
 
 
 
-def transpositionDecrypt(key, message):
-
+def messageDecrypting(key, message):
+    print(key, message)
     keyLen = len(key)
     n = len(message)
+
+    print(key, keyLen, message)
+
     numCols = int(math.ceil(len(message)/float(keyLen)))
     numRows = keyLen
     numShaded = (numRows * numCols) - n

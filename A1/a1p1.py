@@ -6,7 +6,7 @@ def main():
     # Key and Message for first example
     message = 'CIPHERS ARE FUN'
     key = [2,4,1,5,3]
-    ciphertext = encryptMessage(key, message)
+    ciphertext = messageDecrypting(key, message)
     # print the first cypher text after running encryptMessage
     print(ciphertext + '|')
     
@@ -14,10 +14,10 @@ def main():
     message2 = 'ABCDEFG'
     key2 = [1,3,2]
     # print the second cypher text after running encryptMessage
-    ciphertext2 = encryptMessage(key2, message2)
+    ciphertext2 = messageEncrypting(key2, message2)
     print(ciphertext2 + '|')
 
-def encryptMessage(key, message):
+def messageEncrypting(key, message):
     
     # Get the key length and sort the key
     keyLen = len(key)
@@ -38,7 +38,7 @@ def encryptMessage(key, message):
         #encrypt the message based on the unsorted key
         currentPosition = key.pop(0)
         encrypted += ''.join(originalMessage[currentPosition - 1])
-    
+    print(key, 'encrypted key') 
     #return the encrypted message
     return encrypted
 
