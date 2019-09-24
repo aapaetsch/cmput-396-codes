@@ -1,7 +1,7 @@
 # Caesar Cipher
 # http://inventwithpython.com/hacking (BSD Licensed)
 
-import sys, utils
+import sys, util
 
 NUM_SYM = 26
 #key 0 to 25 inclusive
@@ -10,20 +10,48 @@ NUM_SYM = 26
 
 def caesar(key, message):
     translated = []
-
-    num = utils.let2ind(symbol)
-    if (num < 0) or (num >= NUM_SYM):
-        translated.append(symbol)
-    else:
-        num = (num + key) % NUM_SYM
-        translated.append(utils.ind2let(num))
+    messageUpper = message.upper()
+    for i in range(len(message)):
+        num = util.let2ind(messageUpper[i])
+        if (num < 0) or (num >= NUM_SYM):
+            translated.append(messageUpper[i])
+        else:
+            num = (num + key) % NUM_SYM
+            letter = util.ind2let(num)
+            if message[i].isupper():
+                letter = letter.upper()
+            else:
+                letter = letter.lower()
+            translated.append(letter)
     
     return ''.join(translated)
 
+def checkArgs():
+    args = sys.argv
+    print(args)
+    if len(args) == 4:
+        try:
+            args[1] = int(args[1])
+        except:
+            print("Error, Invalid value for key, must be an Int, Quitting...")
+            sys.exit()
+        if args[2].lower() != 'encrypt' and args[2].lower() != 'decrypt':
+            print("Invalid Mode Entered, Must Be 'encrypt' Or 'decrypt', Quitting...")
+            sys.exit()
+
+    else:
+        print(len(args))
+        print('Incorrect Number Of Arguments Entered, Quitting...')
+        sys.exit()
+    return args
+
+
 def main():
-    # message = util.getTextFromFile()
-    message = "the end is near"
-    message = message.upper()
+    args = checkArgs()
+    #message = util.getTextFromFile()
+    message = "The End Is Near"
+
+    
     key = 7
 
     print(" Plaintext:", message)
