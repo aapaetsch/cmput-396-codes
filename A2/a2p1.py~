@@ -1,7 +1,7 @@
 # Caesar Cipher
 # http://inventwithpython.com/hacking (BSD Licensed)
 
-import sys, utils
+import sys, util
 
 NUM_SYM = 26
 #key 0 to 25 inclusive
@@ -11,12 +11,12 @@ NUM_SYM = 26
 def caesar(key, message):
     translated = []
 
-    num = utils.let2ind(symbol)
+    num = util.let2ind(symbol)
     if (num < 0) or (num >= NUM_SYM):
         translated.append(symbol)
     else:
         num = (num + key) % NUM_SYM
-        translated.append(utils.ind2let(num))
+        translated.append(util.ind2let(num))
     
     return ''.join(translated)
 
