@@ -8,23 +8,38 @@ NUM_SYM = 26
 #mode is encrypt/decrypt otherwise terminate
 #single quote for message
 
-def caesar(key, message):
+def caesar(key, message, mode):
     translated = []
     messageUpper = message.upper()
+    if mode == 'decrypt':
+        key = -key
+    shift = 0
     for i in range(len(message)):
         num = util.let2ind(messageUpper[i])
+
         if (num < 0) or (num >= NUM_SYM):
             translated.append(messageUpper[i])
+
         else:
-            num = (num + key) % NUM_SYM
+            
+            if mode == 'encrypt':
+                num = (num + key) % NUM_SYM
+                key = num
+            elif mode == 'decrypt':
+                num = (num - key) % NUM_SYM
+                key = (num + key) % NUM_SYM
             letter = util.ind2let(num)
+
             if message[i].isupper():
                 letter = letter.upper()
             else:
                 letter = letter.lower()
+
             translated.append(letter)
+            
     
     return ''.join(translated)
+
 
 def checkArgs():
     args = sys.argv
@@ -58,12 +73,9 @@ def main():
     mode = args[2]
     message = args[3]
 
+    print(caesar(key, message, mode))
 
-    if mode == "encrypt":
-        print(caesar(key, message))
 
-    elif mode == "decrypt":
-        print(caesar(-key, message))
 
 
 
