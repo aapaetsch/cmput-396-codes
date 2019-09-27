@@ -12,33 +12,51 @@ def caesar(key, message, mode):
     translated = []
     messageUpper = message.upper()
     
-    if mode == 'decrypt':
-        key = -key   
+    newKey = []
+    for letter in key.upper():
+        #if mode == 'decrypt': 
+            #newKey.append(-util.let2ind(letter))
+        #else:
+            #newKey.append(util.let2ind(letter))
+        newKey.append(util.let2ind(letter))
+    shift = 0
+    keyLen = len(newKey)
+    pos = 0 
     for i in range(len(message)):
+        k = newKey[pos]
         num = util.let2ind(messageUpper[i])
 
         if (num < 0) or (num >= NUM_SYM):
             translated.append(messageUpper[i])
 
         else:
+            shift += k
+            if mode == 'encrypt':
+                #shift += k
+                num = (num + shift) % NUM_SYM
+                
             
-            if mode == 'encrypt': 
-                num = (num + key) % NUM_SYM
-                key = num
-            
-            elif mode == 'decrypt':    
-                num = (num - key) % NUM_SYM
-                key = (num + key) % NUM_SYM
+            elif mode == 'decrypt':
+                
+                num = (num - shift) % NUM_SYM
+                
             
             letter = util.ind2let(num)
 
             if message[i].isupper():
                 letter = letter.upper()
+            
             else:
                 letter = letter.lower()
 
             translated.append(letter)
-            
+        
+            if pos == keyLen - 1:
+                pos = 0 
+            else:
+                pos +=1
+
+
     
     return ''.join(translated)
 
@@ -48,11 +66,9 @@ def checkArgs():
 
     if len(args) == 4:
 
-        try:
-            args[1] = int(args[1])
 
-        except:
-            print("Error, Invalid value for key, must be an Int, Quitting...")
+        if not args[1].isalpha():
+            print("Error, Invalid value for key, must be a word or string of alphabetical characters, Quitting...")
             sys.exit()
 
         if args[2].lower() != 'encrypt' and args[2].lower() != 'decrypt':
