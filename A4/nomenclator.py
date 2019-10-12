@@ -105,6 +105,7 @@ def keyIsValid(key):
 	return keyList == lettersList
 
 def regexMatch(expression, text):
+
 	if re.match(expression, text):
 		print('Cipher Text Matches')
 	
@@ -114,6 +115,7 @@ def regexMatch(expression, text):
 	print(text,'\n')
 
 def correctDecipher(message, deciphered):
+	
 	if message == deciphered:
 		print('Deciphered text matches original message')
 
@@ -129,7 +131,7 @@ def main():
 	plaintext = '''At the university of Alberta, examinations take place in December and April
 for the Fall and WINTER terms'''
 	ciphertext1 = encryptMessage(mySubKey, codebook, plaintext)
-	regexToken = '^Lj jia [123] py Lmfacjl, [678] jlka bmlwa sx Oawanfac lxo Lbcsm ypc jia Ylmm lxo 9 jacnr$'
+	regexToken = '^Lj jia [123] py Lmfacjl, [678] jlka bmlwa sx Oawanfac lxo Lbcsm\nypc jia Ylmm lxo 9 jacnr$'
 	regexMatch(regexToken, ciphertext1)
 
 	ciphertext2 = encryptMessage(mySubKey, codebook, plaintext)
