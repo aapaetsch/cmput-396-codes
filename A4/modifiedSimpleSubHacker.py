@@ -11,18 +11,13 @@ def main():
     message = 'Sy l nlx sr pyyacao l ylwj eiswi upar lulsxrj isr sxrjsxwjr, ia esmm rwctjsxsza sj wmpramh, lxo txmarr jia aqsoaxwa sr pqaceiamnsxu, ia esmm caytra jp famsaqa sj. Sy, px jia pjiac ilxo, ia sr pyyacao rpnajisxu eiswi lyypcor l calrpx ypc lwjsxu sx lwwpcolxwa jp isr sxrjsxwjr, ia esmm lwwabj sj aqax px jia rmsuijarj aqsoaxwa. Jia pcsusx py nhjir sr agbmlsxao sx jisr elh. -Facjclxo Ctrramm'
 
     # Determine the possible valid ciphertext translations:
-    print('Hacking...')
-    letterMapping = hackSimpleSub(message)
 
-    # Display the results to the user:
-    print('Mapping:')
-    print(letterMapping)
-    print()
-    print('Original ciphertext:')
+    print('Hacking...\n')
+    hackedMessage = hackSimpleSub(message)
+    print('Original Message:')
     print(message)
-    print()
-    print('Copying hacked message to clipboard:')
-    hackedMessage = decryptWithCipherletterMapping(message, letterMapping)
+    print("\nHacking Results:")
+    # Display the results to the user:
     print(hackedMessage)
 
 
@@ -107,6 +102,15 @@ def removeSolvedLettersFromMapping(letterMapping):
 
 
 def hackSimpleSub(message):
+    #open the dictionary file and save it into a list so we only have to open it once
+    dictionaryFile = 'dictionary.txt'
+    dictionaryList = []
+    with open(dictionaryFile, 'r') as f:
+        for i in f:
+            # Strip all '\n' characters from each of the dictionary words
+            dictionaryList.append(i.strip('\n'))
+
+    #<---Start of textbook code --->
     intersectedMap = getBlankCipherletterMapping()
     cipherwordList = nonLettersOrSpacePattern.sub('', message.upper()).split()
     for cipherword in cipherwordList:
@@ -125,9 +129,91 @@ def hackSimpleSub(message):
         intersectedMap = intersectMappings(intersectedMap, candidateMap)
 
     # Remove any solved letters from the other lists:
-    firstMap = removeSolvedLettersFromMapping(intersectedMap)
-    return 
+    firstMapping = removeSolvedLettersFromMapping(intersectedMap)
+    underscoredText = decryptWithCipherletterMapping(message, firstMapping)
+    #<---End of textbook code--->
 
+    #<-------------- Start of my code ---------->
+    # Turn the original text and the underscored text produced from the first mapping into two lists
+    underscoredTextList = underscoredText.split(' ')
+    originalMessageList = message.split(' ')
+
+    # allPossibleLetters is a list of dictionaries that will be populated from the possible letter mappings
+    # That are produced below
+    allPossibleLetters = []
+    for wordIndex in range(len(underscoredTextList)):
+        # Get a word from the text and the matching cipher word
+        word = underscoredTextList[wordIndex]
+        cipherWord = originalMessageList[wordIndex]
+
+        #if there's a missing character in the word we continue
+        if '_' in word:
+            
+            # Strip all punctuation that would affect the dictionary search           
+            punctuation = ['.',',','!','?',')','(','*','-', "'",'"']
+            for i in punctuation:
+                word = word.strip(i)
+                cipherWord = cipherWord.strip(i)
+            regularexpression = word
+
+            # Here we create the regex token
+            # If the word has an s at the end, search the dictionary for the word with and without an S
+            # I assume that s denotes plural and plural words will not be in the dictionary
+            if regularexpression[-1].lower() == 's':
+                regularexpression = regularexpression + '?'
+            # Replace _ with . to search for anything in that place     
+            regularexpression = '^'+regularexpression.upper().replace('_', '.')+'$'
+
+            # call checkWord function, returns a list of possible dictionary matches 
+            foundWords = checkWord(regularexpression, dictionaryList)
+
+            # Create a dictionary for possible letter matches, keys are the cipherWord letter
+            # value is a list of possible letters to replace that cipherLetter
+            possibleLetters = {}
+            for i in range(len(word)):
+                if word[i] == '_':
+                    # Find the corresponding letter in the possible word[s] for a missing letter
+                    possibleLetters[cipherWord[i].upper()] = []
+                    for possibleWord in foundWords:
+                        possibleLetters[cipherWord[i].upper()].append(possibleWord[i])
+                    
+            allPossibleLetters.append(possibleLetters)
+    
+    # here we update the initial mapping
+    # for each set of possible letters, this is per word that contained a _ after the initial mapping
+    for letterSet in allPossibleLetters:
+        # For each key in the letter set, check if it is in the initial mapping, if not remove it from the set
+        for key in letterSet.keys():
+            for possibleLetter in letterSet[key]:
+                    if possibleLetter not in firstMapping[key]:
+                        letterSet[key].remove(possibleLetter)
+
+            # Assuming at this point, we should be left with one to one pairs in the letterSet
+            if len(letterSet[key]) == 1:
+                # update the mapping to those one to one pairs 
+                # This is only done if the first mapping is not already a one to one pair (not really needed but an additional check) 
+                if letterSet[key][0] in firstMapping[key]:
+                    if len(firstMapping[key]) > 1:
+                        firstMapping[key] = letterSet[key]
+    # remove solved letters from mapping to get rid of any mappings that still might contain multiple letters (again this is a precaution)
+    secondMapping = removeSolvedLettersFromMapping(firstMapping)
+    # return the complete message after decoding the ciphertext with the updated mapping
+    completedMessage = decryptWithCipherletterMapping(message, secondMapping)
+    
+    return completedMessage
+
+
+#This function is from the repython slides from class
+#It has been modified to take in a dictionary so we do not have to open it each time we search
+#https://eclass.srv.ualberta.ca/pluginfile.php/5220613/mod_resource/content/2/rePython.pdf
+def checkWord(regex, dictionaryList):
+    resList = []
+    # If a word in the dictionary list matches the regex token, append to the results list
+    for word in dictionaryList:
+        if re.match(regex,word):
+            resList.append(word)
+
+    return resList
 
 def decryptWithCipherletterMapping(ciphertext, letterMapping):
     # Return a string of the ciphertext decrypted with the letter mapping,

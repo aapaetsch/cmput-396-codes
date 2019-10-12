@@ -34,5 +34,4 @@ For Problem 2:
 
 For Problem 3:
 	The function in modifiedSimpleSubHacker.py hackSimpleSub takes in the
-	cipher text and returns the decoded texteck if the key given is valid,
-otherwise quit 
+	cipher text and returns the decoded text. 

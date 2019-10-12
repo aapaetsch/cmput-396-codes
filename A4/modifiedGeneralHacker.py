@@ -1,8 +1,9 @@
 # Affine and Transposition Cipher Hacker
 # http://inventwithpython.com/hacking (BSD Licensed)
 
-import os, sys, util, a1p2, detectEnglish
-import cryptomath, caesar, affineCipher, transposition
+
+import os, sys, a1p2, detectEnglish
+import cryptomath, caesar, affineCipher
 from itertools import permutations
 SILENT_MODE = True
 outputFile = 'deciphered.txt'
@@ -43,7 +44,7 @@ def hack(cipherType, ciphertext, allPermutations):
 
             if response.strip().upper().startswith('D'):
                 with open(outputFile, 'a') as f:
-                    f.write(cipherType + '    '+decrypted )
+                    f.write(decrypted + '\n')
                 return decrypted
 
     return None
@@ -66,13 +67,14 @@ def main():
         else:
             with open(filename, 'r') as f:
                 for ct in f:
-                    ciphertexts.append(ct)
+                    ciphertexts.append(ct.strip('\n'))
     else:
         print('Error, no cipher file provided.')
         sys.exit()
-
+    print(ciphertexts)
 
     for line in range(len(ciphertexts)):
+        
         ciphertext = ciphertexts[line]
         for cipherType in ['caesar', 'affine', 'transposition']:
         
