@@ -54,7 +54,7 @@ def evalFile(f1, f2):
     	keyAccuracy['Correct'] += keyAccuracyDict[key]
     	keyAccuracy['Total'] += 1
     	
-    return [keyAccuracy['Correct']/keyAccuracy['Total'] , decipherAccuracy]
+    return (keyAccuracy['Correct']/keyAccuracy['Total'] , decipherAccuracy)
     	
 
 

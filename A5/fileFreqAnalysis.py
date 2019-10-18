@@ -11,17 +11,13 @@ def freqDict( f1, frequency):
 	# Keys are cipher characters, values are plaintext equiv
     cipherDict = {}
     # Keys are each letter in the alphabet, start with each value being 0
-    for letter in LETTERS:
-    	cipherDict[letter] = ''
     
     # Open the file and get its contents as a string
     inputFileContents = openFileAsString(f1)
-
     # Do frequency analyis using the function from freqAnalysis (Tested against my own implementation, results are identical, calling this function is cleaner)
     fromFreqAnalysis = freqAnalysis.getFrequencyOrder(inputFileContents)
     for i in range(len(frequency)):
     	cipherDict[fromFreqAnalysis[i]] = frequency[i] 
-
     # Return cipherDict which is the mapping to be used in decrypt
     return cipherDict
     
@@ -29,7 +25,7 @@ def freqDict( f1, frequency):
 def freqDecrypt( f1, f2, frequency):
     
     # Get the frequency mapping from freqDict
-    mapping, mapping2 = freqDict(f1, frequency)
+    mapping = freqDict(f1, frequency)
     # Get the input file as a string
     cipherText = openFileAsString(f1)
 
