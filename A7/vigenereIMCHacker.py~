@@ -1,0 +1,36 @@
+
+
+
+
+
+
+def vigenereKeySolver(ciphertext, keyLength):
+
+
+
+    pass
+    #return a list containing the 10 most likely keys
+
+
+
+
+
+
+
+
+
+
+def main():
+    ciphertext = "QPWKALVRXCQZIKGRBPFAEOMFLJMSDZVDHXCXJYEBIMTRQWNMEAIZRVKCV\
+KVLXNEICFZPZCZZHKMLVZVZIZRRQWDKECHOSNYXXLSPMYKVQXJTDCIOMEEXDQVSRXLRLKZHOV" 
+    a = vigenereKeySolver(ciphertext, 5)
+    assert a[0] == "EVERY"
+
+
+
+
+if __name__ == '__main__':
+    main()
+
+
+
