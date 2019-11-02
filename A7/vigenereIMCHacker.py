@@ -128,61 +128,87 @@ def getNthSubkeysLetters(nth, keyLength, message):
     return ''.join(letters)
 
 def hackVigenere(cipherText):
+    # This function takes in a cipher text and returns the most likely key used for that cipher text
+    # Find the top 4 most likely key lengths
+    possibleKeyLens = keyLengthIC(cipherText, 4)
 
-    possibleKeyLens = keyLengthIC(cipherText, 10)
     allPossibleKeys = []
     foundKeys = []
     keyDecipherments = {}
 
+    # Find the possible keys for each of the 4 most likely key lengths
     for keyLength in possibleKeyLens:
         possibleKeys = vigenereKeySolver(cipherText, keyLength)
         allPossibleKeys += possibleKeys
 
+
     for key in allPossibleKeys:
         possibleDecipherment = vigenere.vigenere(key, cipherText, 'decrypt')
         keyDecipherments[key] = possibleDecipherment    
-       
+    
+    #This while loop is a little unnecessary, however it gets the key that has the highest word percentage decryption of the cipher text
     singleKey = False
+    # start with a high but possible word percentage
     wordPercent = 95
     totalRounds = 0
+    preventReturningNoKeys = []
+
     while singleKey == False:
         foundKeys = []
+
+        # look up the decipherment for each key and check if it is english, hitting the word percentage threshold
+        # add the key to foundKeys if so
         for key in keyDecipherments.keys():
             possibleDecipherment = keyDecipherments[key]
             isItEnglish = detectEnglish.isEnglish(possibleDecipherment, wordPercentage=wordPercent)
             if isItEnglish:
                 foundKeys.append(key)
         
-        if len(foundKeys) == 0:
+        # If the word percentage is too high and no keys were found, decrease it by 5%
+        foundKeysLen = len(foundKeys)
+        if foundKeysLen == 0:
             wordPercent -= 5
-        elif len(foundKeys) == 1 or totalRounds > 25:
-            # if a single key is found or the total rounds has been more than 25
-            # break the loop and use the first key in the foundkeysList
+
+        # If a single key is found or the total rounds of this while loop hits 25, set single key to true and break from the loop 
+        # This prevents an infinite while loop
+        elif foundKeysLen == 1 or totalRounds > 25:
             singleKey = True
 
-        elif len(foundKeys) > 1:
+        # If we get more than one key, the word percentage is most likely set too high, so increment it by 1
+        elif foundKeysLen > 1:
             wordPercent += 1
+
+        # Store the most recent set of found keys that has at least 1 key, this prevents returning no keys
+        if foundKeysLen != 0:
+            preventReturningNoKeys = foundKeys
 
         totalRounds += 1
         
 
-
-
+    # If we exited the while loop with no keys found, get the most valid key from a past loop
+    if len(foundKeys) == 0:
+        foundKeys = preventReturningNoKeys
 
     return foundKeys[0]
 
 def crackPassword():
-    start = time.time()
+    # This function prints out the decrypted text for the password_protected.txt file
+    
+    # Make this true if you wish to see what key was used for the decryption
+    showKey = False
     file = 'password_protected.txt'
     fileContents = ''
     with open(file, 'r') as f:
         for line in f:
             fileContents += line
+
     key = hackVigenere(fileContents)
-    print("\nTime Taken:", time.time()-start)
-    print('Key used:', key)
-    print('Decipherment:', vigenere.vigenere(key, fileContents, 'decrypt'))
-    print()
+
+    if showKey == True:
+        print('Key Used:', key)
+
+    print(vigenere.vigenere(key, fileContents, 'decrypt'))
+    
 
 
 
@@ -200,7 +226,9 @@ KVLXNEICFZPZCZZHKMLVZVZIZRRQWDKECHOSNYXXLSPMYKVQXJTDCIOMEEXDQVSRXLRLKZHOV"
     print("The key is:", hackVigenere(ciphertext2))
     print()
 
+    start = time.time()
     crackPassword()
+    print('Time taken to crack password:', time.time() - start)
 
 
 
