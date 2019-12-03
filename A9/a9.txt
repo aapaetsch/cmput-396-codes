@@ -1,0 +1,21 @@
+Problem 5:
+1. At what level of maxN do you notice the attempted deciphered text does not improve? 
+   Indicate the value of maxN, as well as the decipherment accuracy.
+
+   - maxN does not improve after maxN = 3
+   - decipherment accuracy at this point is: 0.3079470198675497
+
+2. Why does changing the value of maxN give different decipherment accuracies? 
+
+	- A different maxN value results in a different starting n-gram frequency dictionary.
+	- KeyScore is based off of how well a decipherment matches that frequency dictionary.
+	- bestSuccessor uses keyScore to decide if a mapping is better than another.
+	- By changing the maxN value we potentially change the mapping returned by bestSuccessor and as a result can also change future mappings which will lead to a different final decipherment. 
+
+3. Give one benefit of using a high level of maxN, and give one bad consequence of using a high level of maxN. 
+
+	-Benefit: For larger texts, a higher maxN can allow us to create mappings that result in decipherments that more closely match the frequency dictionary. This in turn will result in a higher end decipherment accuracy score. 
+
+	-Consequence: The higher the maxN, the longer breakSub will take to run. (not sure if this is a "bad" consequence)
+		-Additionally some higher maxN values for shorter ciphertexts can result in a lower decipherment accuracy (sometimes hitting 0) as the resulting decipherment cannot closely match the larger n-grams in the frequency dictionary. 
+

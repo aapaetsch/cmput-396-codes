@@ -1,0 +1,226 @@
+----------------------------------------
+-------------- Problem 1 ---------------
+----------------------------------------
+
+$ python3 a9p1.py
+Reading text from "text_for_eng_freq.txt"
+grams frequencies:
+B: 0.0125
+O: 0.0581
+K: 0.0063
+ : 0.1700
+N: 0.0600
+E: 0.1042
+T: 0.0801
+H: 0.0513
+C: 0.0192
+M: 0.0214
+I: 0.0562
+G: 0.0200
+F: 0.0189
+A: 0.0700
+R: 0.0489
+S: 0.0504
+P: 0.0146
+V: 0.0074
+W: 0.0193
+U: 0.0219
+L: 0.0318
+D: 0.0401
+Y: 0.0148
+X: 0.0011
+Q: 0.0006
+Z: 0.0003
+J: 0.0006
+
+----------------------------------------
+-------------- Problem 2 ---------------
+----------------------------------------
+
+$ python3 a9p2.py
+n=2
+Freq text: aabbababbbeeab
+ciphertext: aabbababbbeeab
+Creating ngram-freq from aabbababbbeeab
+grams frequencies:
+AA: 0.0769
+AB: 0.3077
+BB: 0.2308
+BA: 0.1538
+BE: 0.0769
+EE: 0.0769
+EA: 0.0769
+Using default mapping: {'A': 'A', 'B': 'B', 'C': 'C', 'D': 'D', 'E': 'E', 'F': 'F', 'G': 'G', 'H': 'H', 'I': 'I', 'J': 'J', 'K': 'K', 'L': 'L', 'M': 'M', 'N': 'N', 'O': 'O', 'P': 'P', 'Q': 'Q', 'R': 'R', 'S': 'S', 'T': 'T', 'U': 'U', 'V': 'V', 'W': 'W', 'X': 'X', 'Y': 'Y', 'Z': 'Z'}
+Score for n=2, default mapping: 2.5384615384615388
+Swapping 'H' and 'E' in mapping.
+New mapping: {'A': 'A', 'B': 'B', 'C': 'C', 'D': 'D', 'E': 'H', 'F': 'F', 'G': 'G', 'H': 'E', 'I': 'I', 'J': 'J', 'K': 'K', 'L': 'L', 'M': 'M', 'N': 'N', 'O': 'O', 'P': 'P', 'Q': 'Q', 'R': 'R', 'S': 'S', 'T': 'T', 'U': 'U', 'V': 'V', 'W': 'W', 'X': 'X', 'Y': 'Y', 'Z': 'Z'}
+Score for n=2, new mapping: 2.3076923076923075
+
+----------------------------------------
+-------------- Problem 3 ---------------
+----------------------------------------
+
+python3 a9p3.py
+n=2
+Freq text: aabbababbbeeab
+ciphertext: aabbababbbeeab
+Creating ngram-freq from aabbababbbeeab
+grams frequencies:
+AA: 0.0769
+AB: 0.3077
+BB: 0.2308
+BA: 0.1538
+BE: 0.0769
+EE: 0.0769
+EA: 0.0769
+Using mapping: {'A': 'A', 'B': 'B', 'E': 'E'}
+mapping: {'A': 'B', 'B': 'A', 'E': 'E'}
+score: 1.7692307692307694
+mapping: {'A': 'E', 'B': 'B', 'E': 'A'}
+score: 1.1538461538461537
+mapping: {'A': 'A', 'B': 'E', 'E': 'B'}
+score: 0.8461538461538461
+Best mapping found: {'A': 'A', 'B': 'B', 'E': 'E'}
+
+Now trying with mapping: {'A': 'E', 'B': 'B', 'E': 'A'}
+mapping: {'A': 'B', 'B': 'E', 'E': 'A'}
+score: 1.2307692307692308
+mapping: {'A': 'A', 'B': 'B', 'E': 'E'}
+score: 2.5384615384615388
+mapping: {'A': 'E', 'B': 'A', 'E': 'B'}
+score: 1.2307692307692308
+Best mapping found: {'A': 'A', 'B': 'B', 'E': 'E'}
+tuero:solution tuero$ 
+
+
+----------------------------------------
+-------------- Problem 4 ---------------
+----------------------------------------
+
+python3 a9p4.py
+Ciphertext: VE AYO Y FGVUQE INXK KYC VP YMGVX
+Plaintext: IT WAS A BRIGHT COLD DAY IN APRIL
+Freq text: text_for_eng_freq.txt
+maxN=2
+grams frequencies:
+BO: 0.0014
+OO: 0.0022
+OK: 0.0010
+K : 0.0018
+ O: 0.0122
+ON: 0.0087
+NE: 0.0051
+ET: 0.0031
+TH: 0.0295
+HE: 0.0258
+E : 0.0343
+ C: 0.0065
+CO: 0.0031
+OM: 0.0031
+AP: 0.0015
+PT: 0.0006
+TE: 0.0063
+ER: 0.0133
+R : 0.0088
+ E: 0.0032
+...
+VV: 0.0000
+WQ: 0.0000
+YY: 0.0000
+WJ: 0.0000
+UV: 0.0000
+MG: 0.0000
+LJ: 0.0000
+BW: 0.0000
+KP: 0.0000
+Initial mapping from frequency analysis: 
+{'V': 'E', 'Y': 'T', 'E': 'A', 'G': 'O', 'X': 'I', 'K': 'N', 'A': 'S', 'O': 'H', 'F': 'R', 'U': 'D', 'Q': 'L', 'I': 'C', 'N': 'U', 'C': 'M', 'P': 'W', 'M': 'F'}
+Next mapping found by bestSuccessor: {'V': 'A', 'Y': 'T', 'E': 'E', 'G': 'O', 'X': 'I', 'K': 'N', 'A': 'S', 'O': 'H', 'F': 'R', 'U': 'D', 'Q': 'L', 'I': 'C', 'N': 'U', 'C': 'M', 'P': 'W', 'M': 'F'}
+Next mapping found by bestSuccessor: {'V': 'A', 'Y': 'T', 'E': 'E', 'G': 'O', 'X': 'I', 'K': 'N', 'A': 'S', 'O': 'H', 'F': 'R', 'U': 'W', 'Q': 'L', 'I': 'C', 'N': 'U', 'C': 'M', 'P': 'D', 'M': 'F'}
+Next mapping found by bestSuccessor: {'V': 'R', 'Y': 'T', 'E': 'E', 'G': 'O', 'X': 'I', 'K': 'N', 'A': 'S', 'O': 'H', 'F': 'A', 'U': 'W', 'Q': 'L', 'I': 'C', 'N': 'U', 'C': 'M', 'P': 'D', 'M': 'F'}
+Next mapping found by bestSuccessor: {'V': 'R', 'Y': 'T', 'E': 'E', 'G': 'O', 'X': 'I', 'K': 'N', 'A': 'S', 'O': 'H', 'F': 'A', 'U': 'C', 'Q': 'L', 'I': 'W', 'N': 'U', 'C': 'M', 'P': 'D', 'M': 'F'}
+Next mapping found by bestSuccessor: {'V': 'R', 'Y': 'T', 'E': 'E', 'G': 'O', 'X': 'I', 'K': 'N', 'A': 'S', 'O': 'H', 'F': 'A', 'U': 'C', 'Q': 'L', 'I': 'W', 'N': 'U', 'C': 'F', 'P': 'D', 'M': 'M'}
+Next mapping found by bestSuccessor: {'V': 'R', 'Y': 'T', 'E': 'E', 'G': 'O', 'X': 'I', 'K': 'N', 'A': 'A', 'O': 'H', 'F': 'S', 'U': 'C', 'Q': 'L', 'I': 'W', 'N': 'U', 'C': 'F', 'P': 'D', 'M': 'M'}
+Next mapping found by bestSuccessor: {'V': 'R', 'Y': 'T', 'E': 'E', 'G': 'O', 'X': 'I', 'K': 'N', 'A': 'A', 'O': 'H', 'F': 'F', 'U': 'C', 'Q': 'L', 'I': 'W', 'N': 'U', 'C': 'S', 'P': 'D', 'M': 'M'}
+Next mapping found by bestSuccessor: {'V': 'R', 'Y': 'T', 'E': 'E', 'G': 'O', 'X': 'I', 'K': 'N', 'A': 'A', 'O': 'H', 'F': 'F', 'U': 'U', 'Q': 'L', 'I': 'W', 'N': 'C', 'C': 'S', 'P': 'D', 'M': 'M'}
+Next mapping found by bestSuccessor: {'V': 'R', 'Y': 'T', 'E': 'E', 'G': 'O', 'X': 'I', 'K': 'N', 'A': 'A', 'O': 'H', 'F': 'F', 'U': 'U', 'Q': 'L', 'I': 'W', 'N': 'M', 'C': 'S', 'P': 'D', 'M': 'C'}
+Next mapping found by bestSuccessor: {'V': 'R', 'Y': 'T', 'E': 'E', 'G': 'O', 'X': 'I', 'K': 'N', 'A': 'A', 'O': 'H', 'F': 'F', 'U': 'U', 'Q': 'M', 'I': 'W', 'N': 'L', 'C': 'S', 'P': 'D', 'M': 'C'}
+Next mapping found by bestSuccessor: {'V': 'R', 'Y': 'T', 'E': 'E', 'G': 'O', 'X': 'I', 'K': 'N', 'A': 'A', 'O': 'H', 'F': 'F', 'U': 'U', 'Q': 'M', 'I': 'W', 'N': 'L', 'C': 'S', 'P': 'D', 'M': 'C'}
+grams frequencies:
+B: 0.0125
+O: 0.0581
+K: 0.0063
+ : 0.1700
+N: 0.0600
+E: 0.1042
+T: 0.0801
+H: 0.0513
+C: 0.0192
+M: 0.0214
+I: 0.0562
+G: 0.0200
+F: 0.0189
+A: 0.0700
+R: 0.0489
+S: 0.0504
+P: 0.0146
+V: 0.0074
+W: 0.0193
+U: 0.0219
+L: 0.0318
+D: 0.0401
+Y: 0.0148
+X: 0.0011
+Q: 0.0006
+Z: 0.0003
+J: 0.0006
+Initial mapping from frequency analysis: 
+{'V': 'R', 'Y': 'T', 'E': 'E', 'G': 'O', 'X': 'I', 'K': 'N', 'A': 'A', 'O': 'H', 'F': 'F', 'U': 'U', 'Q': 'M', 'I': 'W', 'N': 'L', 'C': 'S', 'P': 'D', 'M': 'C'}
+Best mapping: {'V': 'R', 'Y': 'T', 'E': 'E', 'G': 'O', 'X': 'I', 'K': 'N', 'A': 'A', 'O': 'H', 'F': 'F', 'U': 'U', 'Q': 'M', 'I': 'W', 'N': 'L', 'C': 'S', 'P': 'D', 'M': 'C'}
+Attempted cipherment: RE ATH T FORUME WLIN NTS RD TCORI
+
+
+----------------------------------------
+-------------- Problem 5 ---------------
+----------------------------------------
+
+
+$ python3 a9p5.py
+Ciphertext: VE AYO Y FGVUQE INXK KYC VP YMGVX
+Plaintext: IT WAS A BRIGHT COLD DAY IN APRIL
+Freq text: text_for_eng_freq.txt
+maxN=1
+Best mapping: {'V': 'E', 'Y': 'T', 'E': 'A', 'G': 'O', 'X': 'I', 'K': 'N', 'A': 'S', 'O': 'H', 'F': 'R', 'U': 'D', 'Q': 'L', 'I': 'C', 'N': 'U', 'C': 'M', 'P': 'W', 'M': 'F'}
+Attempted cipherment: EA STH T ROEDLA CUIN NTM EW TFOEI
+
+maxN=2
+Best mapping: {'V': 'R', 'Y': 'T', 'E': 'E', 'G': 'O', 'X': 'I', 'K': 'N', 'A': 'A', 'O': 'H', 'F': 'F', 'U': 'U', 'Q': 'M', 'I': 'W', 'N': 'L', 'C': 'S', 'P': 'D', 'M': 'C'}
+Attempted cipherment: RE ATH T FORUME WLIN NTS RD TCORI
+
+maxN=3
+Best mapping: {'V': 'O', 'Y': 'T', 'E': 'D', 'G': 'E', 'X': 'U', 'K': 'S', 'A': 'I', 'O': 'M', 'F': 'W', 'U': 'A', 'Q': 'N', 'I': 'C', 'N': 'L', 'C': 'R', 'P': 'F', 'M': 'H'}
+Attempted cipherment: OD ITM T WEOAND CLUS STR OF THEOU
+
+maxN=4
+Best mapping: {'V': 'N', 'Y': 'T', 'E': 'F', 'G': 'E', 'X': 'A', 'K': 'S', 'A': 'I', 'O': 'O', 'F': 'M', 'U': 'C', 'Q': 'L', 'I': 'U', 'N': 'W', 'C': 'R', 'P': 'D', 'M': 'H'}
+Attempted cipherment: NF ITO T MENCLF UWAS STR ND THENA
+
+maxN=5
+Best mapping: {'V': 'O', 'Y': 'T', 'E': 'N', 'G': 'E', 'X': 'R', 'K': 'I', 'A': 'A', 'O': 'M', 'F': 'W', 'U': 'D', 'Q': 'L', 'I': 'C', 'N': 'U', 'C': 'S', 'P': 'F', 'M': 'H'}
+Attempted cipherment: ON ATM T WEODLN CURI ITS OF THEOR
+
+maxN=6
+Best mapping: {'V': 'A', 'Y': 'E', 'E': 'T', 'G': 'O', 'X': 'I', 'K': 'M', 'A': 'H', 'O': 'L', 'F': 'R', 'U': 'D', 'Q': 'W', 'I': 'C', 'N': 'U', 'C': 'N', 'P': 'S', 'M': 'F'}
+Attempted cipherment: AT HEL E ROADWT CUIM MEN AS EFOAI
+
+maxN=7
+Best mapping: {'V': 'C', 'Y': 'E', 'E': 'N', 'G': 'M', 'X': 'I', 'K': 'S', 'A': 'A', 'O': 'U', 'F': 'R', 'U': 'D', 'Q': 'O', 'I': 'T', 'N': 'H', 'C': 'L', 'P': 'W', 'M': 'F'}
+Attempted cipherment: CN AEU E RMCDON THIS SEL CW EFMCI
+
+maxN=8
+Best mapping: {'V': 'E', 'Y': 'T', 'E': 'A', 'G': 'O', 'X': 'I', 'K': 'N', 'A': 'S', 'O': 'H', 'F': 'R', 'U': 'D', 'Q': 'L', 'I': 'C', 'N': 'U', 'C': 'M', 'P': 'W', 'M': 'F'}
+Attempted cipherment: EA STH T ROEDLA CUIN NTM EW TFOEI
+
+maxN=9
+Best mapping: {'V': 'E', 'Y': 'T', 'E': 'A', 'G': 'O', 'X': 'I', 'K': 'N', 'A': 'S', 'O': 'H', 'F': 'R', 'U': 'D', 'Q': 'L', 'I': 'C', 'N': 'U', 'C': 'M', 'P': 'W', 'M': 'F'}
+Attempted cipherment: EA STH T ROEDLA CUIN NTM EW TFOEI
