@@ -1,4 +1,7 @@
+
 from bob import make_bob, otp_encrypt
+import random
+import bob
 
 FILTERS="x+"
 DIAGONAL="↗↖"
@@ -23,7 +26,15 @@ def problem1(bob, message):
     6.  Call otp_encrypt(key, message) to encrypt the message and then use
         bob.message(ciphertext) to send Bob the coded message
     """
-    raise NotImplemented("TODO")
+    # raise NotImplemented("TODO")
+    print(bob)
+    print(message)
+    generateKey(message)
+
+
+def generateKey(messageLen):
+    choices = bob.choices(ALL, 10)
+    print(choices)
 
 
 def problem2(bob, message):
