@@ -27,8 +27,7 @@ def problem1(bob, message):
         bob.message(ciphertext) to send Bob the coded message
     """
     # raise NotImplemented("TODO")
-    print(bob)
-    print(message)
+
     generateKey(message)
 
 
