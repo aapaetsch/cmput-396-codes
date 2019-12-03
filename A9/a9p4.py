@@ -7,8 +7,10 @@ def breakSub(ciphertext, freqtext, maxN):
 	# This function takes in a ciphertext, frequency text and maxN
 	# returns the deciphered texted based on the final mapping
 	freqTextString = a9p1.cleanText(freqtext)
+	#I keep a version of ciphertext that only has spaces fixed so that the final decipherment will keep punctuation. 
 	ciphertext = ' '.join(ciphertext.split())
 	cleanciphertext = a9p1.cleanText(ciphertext)
+	
 	#We make the initial mapping from the ciphertext and ETAOIN order
 	mapping = makeMapping(cleanciphertext)
 
