@@ -7,9 +7,10 @@ def breakSub(ciphertext, freqtext, maxN):
 	# This function takes in a ciphertext, frequency text and maxN
 	# returns the deciphered texted based on the final mapping
 	freqTextString = a9p1.cleanText(freqtext)
-	
+	ciphertext = ' '.join(ciphertext.split())
+	cleanciphertext = a9p1.cleanText(ciphertext)
 	#We make the initial mapping from the ciphertext and ETAOIN order
-	mapping = makeMapping(ciphertext)
+	mapping = makeMapping(cleanciphertext)
 
 
 	n = maxN 
@@ -22,7 +23,7 @@ def breakSub(ciphertext, freqtext, maxN):
 		#We must create a new frequencies dictionary each time n changes
 		frequencies = a9p1.ngramsFreqs(freqTextString, n)
 		#Get the initial successor mapping
-		successorMapping = a9p3.bestSuccessor(inputMapping.copy(), ciphertext, frequencies, n)
+		successorMapping = a9p3.bestSuccessor(inputMapping.copy(), cleanciphertext, frequencies, n)
 
 		# We must continue finding successor mappings until the best possible successor mapping has been found
 		# for a given n value
@@ -35,10 +36,10 @@ def breakSub(ciphertext, freqtext, maxN):
 			else:
 				# if successorMapping and inputMapping do not match, the best possible successor has not been found
 				inputMapping = successorMapping.copy()
-				successorMapping = a9p3.bestSuccessor(inputMapping.copy(), ciphertext, frequencies, n)
+				successorMapping = a9p3.bestSuccessor(inputMapping.copy(), cleanciphertext, frequencies, n)
 		
 		n -= 1
-		
+
 	plaintext = decipher(successorMapping, ciphertext)
 	print("Best Mapping:", inputMapping)
 	return plaintext

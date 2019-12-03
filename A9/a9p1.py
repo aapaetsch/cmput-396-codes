@@ -38,10 +38,10 @@ def cleanText(inputText):
 	# this function cleans all extra spaces and non alphabetical characters
 	inputText = inputText.upper()
 	inputText = " ".join(inputText.split())
-
+	LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 	outputText = ''
 	for char in inputText:
-		if char.isupper() or char == " ":
+		if char in LETTERS or char == " ":
 			outputText += char
 	return outputText
 

@@ -12,6 +12,7 @@ def incrementMaxN(ciphertext, plaintext, freqtext):
 	while True:
 		print("maxN:",maxN)
 		decipherment = a9p4.breakSub(ciphertext, freqtext, maxN)
+		plaintext = " ".join(plaintext.split())
 		decipherAcc = getDecipherAcc(decipherment, plaintext)
 		print("Attempted cipherment:", decipherment)
 		print("Decipher Accuracy:", decipherAcc)
@@ -36,7 +37,7 @@ def getDecipherAcc(attemptedDecipherment, correctDecipherment):
 
 	attemptedDecipherment = attemptedDecipherment.upper()
 	correctDecipherment = correctDecipherment.upper()
-
+	print(correctDecipherment)
 	for i in range(len(attemptedDecipherment)):
 		# only count alphabetical characters
 		if attemptedDecipherment[i] in LETTERS:
@@ -64,13 +65,12 @@ def main():
 	with open('ciphertext.txt','r') as f:
 		for line in f:
 			ciphertext2 += line
-	ciphertext2 = a9p1.cleanText(ciphertext2)
 
 	plaintext2 = ''
 	with open('plaintext.txt', 'r') as f:
 		for line in f:
 			plaintext2 += line
-	plaintext2 = a9p1.cleanText(plaintext2)
+	
 
 	incrementMaxN(ciphertext2, plaintext2, freqTextString)
 

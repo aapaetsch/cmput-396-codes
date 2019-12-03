@@ -1,4 +1,4 @@
-from a9p1 import ngramsFreqs
+from a9p1 import ngramsFreqs, cleanText
 
 def keyScore(mapping, ciphertext, frequencies, n):
 	#returns the n-gram score (floating point number), 
@@ -8,6 +8,7 @@ def keyScore(mapping, ciphertext, frequencies, n):
 
 	ciphertext = ciphertext.upper()
 	ciphertext = " ".join(ciphertext.split())
+	ciphertext = cleanText(ciphertext)
 
 	plainText = ""
 	cipherTextLen = len(ciphertext)

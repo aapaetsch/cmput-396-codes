@@ -3,7 +3,7 @@ import a9p2
 
 def bestSuccessor(mapping, ciphertext, frequencies, n):
     #Return the succesor with the highest score, otherwise return its successor
- 
+    ciphertext = a9p1.cleanText(ciphertext)
     score = a9p2.keyScore(mapping, ciphertext, frequencies, n)
     
     remainingSwaps = list(mapping.keys())
