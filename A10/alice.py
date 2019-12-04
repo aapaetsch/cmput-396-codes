@@ -28,12 +28,55 @@ def problem1(bob, message):
     """
     # raise NotImplemented("TODO")
 
-    generateKey(message)
+    #1. Generates a key of length: messageLen * a value between 11 and 21.0
+    messageLen = len(message)
+    photons = generateKey(messageLen)
+    
+    #2. 
+    bobFilters = bob.quantum_channel(photons)
+
+    #3.
+    disposalInstructions = validateFilters(photons, bobFilters)
+    
+    #4. 
+    bob.dispose(disposalInstructions)
+
+    #5. 
+    
+
+
+def validateFilters(photons, filters):
+    # This function takes in the photons sent to bob and the filters returned from bob
+    # Returns a list of boolean indicating if the correct filter was used
+    diag = DIAGONAL + "x"
+    rect = RECTILINEAR + "+"
+    isValid = []
+    
+    for i in range(len(photons)):
+        
+        photon = photons[i]
+        filt = filters[i]
+        
+        if ((photon in diag) and (filt in diag)) or ((photon in rect) and (filt in rect)):
+            isValid.append(True)
+        
+        else:
+            isValid.append(False)
+    
+    return isValid
+
+
+
+
+
 
 
 def generateKey(messageLen):
-    choices = bob.choices(ALL, 10)
-    print(choices)
+    # This function takes in a message length and multiplies it by a random
+    # key length value between 11 and 21.0
+    randomKeyLen = int(messageLen * (random.randint(11,20) + random.random()))
+    photons = bob.choices(ALL, randomKeyLen)
+    return photons
 
 
 def problem2(bob, message):

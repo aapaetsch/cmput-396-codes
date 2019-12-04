@@ -137,7 +137,7 @@ def make_bob(problemNumber):
         def report_eve(self):
             """
             Call this method only when you're positive that your messages have been intercepted
-            Your program ca\n end after calling this method
+            Your program can end after calling this method
             """
             print("Eve Reported!")
         
