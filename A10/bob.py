@@ -84,7 +84,7 @@ def make_bob(problemNumber):
                 The list will have the same length as data unless photons are dropped
             """
             nonlocal key
-            assert all(e in set(ALL) for e in data), f"Elements in data must be one of '{ALL}'"
+            assert all(e in set(ALL) for e in data), "Elements in data must be one of '{}'".format(ALL)
             filters = choices(FILTERS, k=len(data))
 
             new_key = tuple((apply_filter(f, datum) for f, datum in zip(filters, data)))
@@ -108,7 +108,7 @@ def make_bob(problemNumber):
             after dispose: with elements = [True, False]; key == ["↗"]
             """ 
             nonlocal key
-            assert all(type(e) is bool for e in elements), f"Elements in data must be one of '{ALL}'"
+            assert all(type(e) is bool for e in elements), "Elements in elements must be one of True or False"
             assert len(elements) == len(key), "The elements argument in 'dispose(elements)' must be the same length as the data bob has stored"
             key = tuple(map(itemgetter(0), filter(itemgetter(1), zip(key, elements))))
         
@@ -125,7 +125,7 @@ def make_bob(problemNumber):
             """
             neededKeyLength = len(ciphertext) * 5
             message = otp_decrypt(key[:neededKeyLength], ciphertext)
-            print(f"Bob's message: {message}")
+            print("Bob's message: {}".format(message))
             def done_error(*args, **kwargs):
                 raise Exception("bob.message() has already been called")
             self.quantum_channel = done_error
